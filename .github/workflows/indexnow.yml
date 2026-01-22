@@ -28,7 +28,6 @@ jobs:
       env:
         INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
       run: python indexnow_automation.py
-
           - name: Upload llms.txt artifact
       uses: actions/upload-artifact@v3
       with:
