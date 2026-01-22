@@ -14,6 +14,7 @@ INDEXNOW_KEY = "042c34e968944841848a58ea92fb2905"
 KEY_LOCATION = f"https://ticketshield.com/{INDEXNOW_KEY}.txt"
 SITE_URL = "https://ticketshield.com"
 SITEMAP_URL = f"{SITE_URL}/sitemap.xml"
+
 def fetch_all_urls():
     """Fetch all URLs from the sitemap"""
     print(f"[{datetime.now()}] Fetching sitemap from {SITEMAP_URL}...")
@@ -92,7 +93,6 @@ def submit_to_indexnow(urls):
     
     return True
 
-
 def generate_llms_txt(urls):
     """Generate llms.txt file for AI assistant discoverability"""
     print(f"\n[{datetime.now()}] Generating llms.txt file...")
@@ -107,7 +107,7 @@ def generate_llms_txt(urls):
 
 ## About
 
-TicketShield helps drivers fight traffic tickets across the United States. We connect drivers with experienced traffic attorneys who specialize in ticket defense, license protection, and traffic violation cases.
+TicketShield helps drivers fight traffic tickets across the United States. We connect drivers with experienced traffic attorneys who specialize in ticket defense, license protection, and traffic [...]  
 
 ## Key Services
 
@@ -117,8 +117,7 @@ TicketShield helps drivers fight traffic tickets across the United States. We co
 - Traffic Criminal Offenses
 - Insurance Points Reduction
 
-## Blog & Resources ({len(blog_urls)} articles)
-
+## Blog & Resources ({len(blog_urls)} articles)\n
 """
     
     # Add recent blog posts
@@ -163,7 +162,7 @@ def main():
     # Submit to IndexNow
     if urls:
         submit_to_indexnow(urls)
-                generate_llms_txt(urls)
+        generate_llms_txt(urls)
     
     print()
     print(f"Completed: {datetime.now()}")
