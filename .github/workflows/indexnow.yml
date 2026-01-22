@@ -1,5 +1,8 @@
 name: IndexNow Daily Submission
 
+permissions:
+  contents: read
+
 on:
   schedule:
     # Run daily at 2 AM UTC
