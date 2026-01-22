@@ -11,8 +11,7 @@ import json
 
 # Configuration
 INDEXNOW_KEY = "042c34e968944841848a58ea92fb2905"
-KEY_LOCATION = "https://ticketshield.com/.well-known/042c34e968944841848a58ea92fb2905.txt"
-SITE_URL = "https://ticketshield.com"
+KEY_LOCATION = f"https://ticketshield.com/{INDEXNOW_KEY}.txt"SITE_URL = "https://ticketshield.com"
 SITEMAP_URL = f"{SITE_URL}/sitemap.xml"
 
 def fetch_all_urls():
@@ -93,6 +92,63 @@ def submit_to_indexnow(urls):
     
     return True
 
+
+def generate_llms_txt(urls):
+    """Generate llms.txt file for AI assistant discoverability"""
+    print(f"\n[{datetime.now()}] Generating llms.txt file...")
+    
+    # Filter for important content
+    blog_urls = [url for url in urls if '/blog/' in url or '/insights/' in url]
+    
+    # Build llms.txt content
+    content = f"""# TicketShield - Traffic Ticket Defense
+
+> {SITE_URL}
+
+## About
+
+TicketShield helps drivers fight traffic tickets across the United States. We connect drivers with experienced traffic attorneys who specialize in ticket defense, license protection, and traffic violation cases.
+
+## Key Services
+
+- Traffic Ticket Defense
+- DUI/DWI Defense  
+- License Suspension Help
+- Traffic Criminal Offenses
+- Insurance Points Reduction
+
+## Blog & Resources ({len(blog_urls)} articles)
+
+"""
+    
+    # Add recent blog posts
+    for url in blog_urls[:20]:  # Limit to 20 most recent
+        content += f"- {url}\n"
+    
+    content += f"\n## Important Pages\n\n"
+    important_pages = [
+        f"{SITE_URL}/about",
+        f"{SITE_URL}/services",
+        f"{SITE_URL}/traffic-tickets",
+        f"{SITE_URL}/dui",
+        f"{SITE_URL}/faqs",
+        f"{SITE_URL}/contact"
+    ]
+    
+    for page in important_pages:
+        if page in urls:
+            content += f"- {page}\n"
+    
+    # Save to file
+    try:
+        with open('llms.txt', 'w') as f:
+            f.write(content)
+        print(f"✓ llms.txt generated with {len(blog_urls)} blog posts")
+        return True
+    except Exception as e:
+        print(f"✗ Error generating llms.txt: {e}")
+        return False
+
 def main():
     """Main execution"""
     print("=" * 60)
@@ -107,6 +163,7 @@ def main():
     # Submit to IndexNow
     if urls:
         submit_to_indexnow(urls)
+                generate_llms_txt(urls)
     
     print()
     print(f"Completed: {datetime.now()}")
