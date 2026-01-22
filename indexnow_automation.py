@@ -8,11 +8,12 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime
 import json
+import os
 
 # Configuration
-INDEXNOW_KEY = "0a2c34a96894d84f848a58ea92fb2985"
-KEY_LOCATION = f"https://ticketshield.com/.well-known/{INDEXNOW_KEY}.txt"
-SITE_URL = "https://ticketshield.com"
+INDEXNOW_KEY = os.environ.get('INDEXNOW_KEY', '0d50972d50074294add5020661864326')
+SITE_URL = "https://www.ticketshield.com"
+KEY_LOCATION = f"{SITE_URL}/.well-known/{INDEXNOW_KEY}.txt"
 SITEMAP_URL = f"{SITE_URL}/sitemap.xml"
 def fetch_all_urls():
     """Fetch all URLs from the sitemap"""
@@ -65,7 +66,7 @@ def submit_to_indexnow(urls):
         batch_num = (i // batch_size) + 1
         
         payload = {
-            "host": "ticketshield.com",
+            "host": "www.ticketshield.com",
             "key": INDEXNOW_KEY,
             "keyLocation": KEY_LOCATION,
             "urlList": batch
