@@ -13,6 +13,7 @@ import json
 INDEXNOW_KEY = "0a2c34a96894d84f848a58ea92fb2985"
 KEY_LOCATION = f"https://ticketshield.com/.well-known/{INDEXNOW_KEY}.txt"
 SITE_URL = "https://ticketshield.com"
+SITEMAP_URL = f"{SITE_URL}/sitemap.xml"
 def fetch_all_urls():
     """Fetch all URLs from the sitemap"""
     print(f"[{datetime.now()}] Fetching sitemap from {SITEMAP_URL}...")
